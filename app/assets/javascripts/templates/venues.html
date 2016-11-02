@@ -1,0 +1,33 @@
+<h1 class="text-center">Search in Foursquare and Wikipedia</h1>
+<form name="form" novalidate>
+    <div>
+        <input name="address" type="text" data-ng-model="address" class="form-control" placeholder="Enter address e.g. New York" required />
+    </div>
+
+    <div>
+        <input name="category" type="text" data-ng-model="category" class="form-control" placeholder="Specify Category. e.g. Burger" required />
+    </div>
+
+    <div>
+        <button class="btn btn-primary pull-right" data-ng-click="doSearch(form.address.$error.required, form.category.$error.required)">Explore</button>
+    </div>
+</form>
+
+<table>
+  <tr>
+    <td valign="top">
+      <div ng-repeat="venue in venues" ng-if="!isInFavorite(venue.venue.name)">
+        <p>{{ venue.venue.name }} </p>
+        <button ng-click="addFavoriteFoursquare(venue)">Add to Favorite</button>
+      </div>
+    </td>
+    <td valign="top">  
+      <div ng-repeat="interest in interests" ng-if="!isInFavorite(interest.title)">
+        {{ interest.title }}
+         <button ng-click="addFavoriteWikipedia(interest)">Add to Favorite</button>
+      </div>
+    </td>
+  </tr>
+</table>
+
+

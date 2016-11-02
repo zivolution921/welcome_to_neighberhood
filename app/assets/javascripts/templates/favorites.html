@@ -1,0 +1,52 @@
+<h1>Welcome to my Favorites</h1>
+<form name="form" novalidate>
+  <label for="">Address</label>
+  <input name="address" data-ng-model="homeAddress" type="text" placeholder="Enter address e.g. New York" required> ||
+  <button ng-click="currentLocation()">Get Current Location</button><br>
+  <button ng-click="calculate(form.address.$error.required)">Calculate Distance</button>
+</form>
+<br>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Distance</th>
+      <th>Visited</th>
+      <th>Notes</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <tr ng-repeat="favorite in favorites">
+      <td>
+        <a target="_blank" ng-href="{{'https://www.google.com/maps/place/' + favorite.address}}">{{ favorite.name | uppercase }}</a>
+      </td>
+
+      <td>
+        <a ng-href="">{{ favorite.address }}</a>
+      </td>
+
+      <th>{{ favorite.distance == null ? 'N/A' : favorite.distance.toFixed(1) + 'mi' }}</th>
+
+      <td>
+        <span ng-if="favorite.visited !== true"><p>Not Visited Yet</p></span>
+        <button ng-if="favorite.visited !== true" ng-click="favorite.visited= true; update(favorite)">Visited</button>
+        <button ng-if="favorite.visited === true" ng-click="favorite.visited = false; update(favorite)">Undo visit</button>
+      </td>
+
+      <td>
+        <button ng-click="favorite.edit = true" ng-if="favorite.edit !== true">{{ favorite.notes }}</button>
+        <input ng-if="favorite.edit === true" type="text" ng-model="favorite.notes">
+        <button ng-if="favorite.edit === true" ng-click="update(favorite)">Update</button>
+      </td>
+      
+      <td>
+        <button ng-click="delete(favorite, $index)">Delete</button>
+      </td>
+      
+    </tr>
+  </tbody>
+</table>
