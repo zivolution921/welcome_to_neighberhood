@@ -2,7 +2,8 @@ angular
     .module('myApp', [
         'ngAnimate',
         'ui.router',
-        'templates'
+        'templates',
+        'ngMap'
     ])
     .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
@@ -24,6 +25,11 @@ angular
           url: 'favorites',
           templateUrl: 'favorites.html',
           controller: 'FavoritesController'
+        })
+        .state('home.maps', {
+          url: 'maps', 
+          templateUrl: 'maps.html', 
+          controller: 'MapsController'
         });
 
     // default fall back route

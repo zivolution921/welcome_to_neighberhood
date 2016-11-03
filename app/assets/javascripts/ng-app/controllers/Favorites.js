@@ -1,7 +1,7 @@
 angular.module('myApp')
   .controller('FavoritesController', function($scope, $http, FavoritesService) {
    
-    $http.get('favorites').then(function(result) {
+    FavoritesService.list().then(function(result) {
       console.log(result.data)
       $scope.favorites = result.data;
     })

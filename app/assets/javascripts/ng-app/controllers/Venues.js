@@ -47,27 +47,27 @@ angular.module('myApp')
       })
    
 
-      $scope.addFavoriteFoursquare = function(location) {
-        console.log(location);
-        var locationName = location.venue.name;
-        $scope.listFavorites.push({name: locationName});
+      $scope.addFavoriteFoursquare = function(location) {  
         FavoritesService.create({
           name: location.venue.name,
           lat: location.venue.location.lat,
           lng: location.venue.location.lng,
           address: location.venue.location.formattedAddress.join(', ')
+        }).then(function(result){
+          $scope.listFavorites.push(result.data);
         })
       }
 
       $scope.addFavoriteWikipedia = function(location) {
         console.log(location,"wilipedia");
-        $scope.listFavorites.push({name: location.title });
         $http.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + location.lat + ',' + location.lon).then(function(response){
           FavoritesService.create({
             name: location.title,
             lat: location.lat,
             lng: location.lon,
             address: response.data.results[0].formatted_address
+          }).then(function(result) {
+            $scope.listFavorites.push(result.data)
           })
         });
       }

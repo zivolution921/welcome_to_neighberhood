@@ -15,6 +15,8 @@
 //= require angular
 //= require angular-animate
 //= require angular-ui-router
+//= require ngmap
+//= require markerclustererplus
 //= require angular-rails-templates
 //= require_tree ./templates
 //= require_tree .
